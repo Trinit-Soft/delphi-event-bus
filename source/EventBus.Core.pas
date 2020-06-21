@@ -121,7 +121,9 @@ begin
       begin
         ASubscription.SubscriberMethod.Method.Invoke(ASubscription.Subscriber,
           [AEvent]);
-      end;
+      end
+      else
+        FreeAndNil(AEvent); //prevent Memoryleak
     end;
 end;
 
@@ -134,7 +136,9 @@ begin
       begin
         ASubscription.SubscriberMethod.Method.Invoke(ASubscription.Subscriber,
           [AEvent]);
-      end;
+      end
+      else
+        FreeAndNil(AEvent); //prevent Memoryleak
     end;
 end;
 
@@ -346,7 +350,9 @@ begin
     if LSubscription.Subscriber = ASubscriber then
     begin
       LSubscription.Active := false;
-      LSubscriptions.Delete(I);
+      // if you unregister while you process Thread Queue Message, than you get Access Violation,
+      // the item is cleanuped later
+      // old: LSubscriptions.Delete(I);
     end;
   end;
 end;
