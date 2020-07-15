@@ -23,7 +23,7 @@ uses
 
 type
 
-  TThreadMode = (Posting, Main, Async, Background);
+  TThreadMode = (Posting, Main, Queue, Async, Background);
 
   TCloneEventCallback = function(const AObject: TObject): TObject of object;
   TCloneEventMethod = TFunc<TObject, TObject>;

@@ -225,6 +225,8 @@ begin
         InvokeSubscriber(ASubscription, AEvent)
       else
         TThread.Queue(nil, GenerateThreadProc(ASubscription, AEvent));
+    Queue:
+      TThread.Queue(nil, GenerateThreadProc(ASubscription, AEvent));
     Background:
       if (AIsMainThread) then
 {$IF CompilerVersion >= 28.0}
